@@ -20,6 +20,13 @@ jobs:
         shell: cmd
         run: git clone --recursive https://jugit.fz-juelich.de/mlz/libcerf.git && cd libcerf && git checkout ${{ env.tagName }}
       
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: replace CMakeLists.txt
+        shell: cmd
+        run: xcopy /H /Y /C ".\CMakeLists.txt" ".\libcerf\"
+        
       - name: curl x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
         shell: cmd
         run:  cd /d ${{ github.workspace }} && curl https://github.com/2641797006/c/blob/master/GCC-zip/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z?raw=true -L --output x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z && dir && 7z.exe x x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
