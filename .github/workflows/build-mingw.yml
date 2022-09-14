@@ -16,12 +16,12 @@ jobs:
       tagName: v2.1 # target tag
       mingwTargetZip: libcerf-${{ github.ref_name }}-x86_64-posix-seh-rev0-8.1.0.zip
     steps:
-      - name: git clone
-        shell: cmd
-        run: git clone --recursive https://jugit.fz-juelich.de/mlz/libcerf.git && cd libcerf && git checkout ${{ env.tagName }}
-      
       - name: Checkout
         uses: actions/checkout@v3
+        
+      - name: git clone
+        shell: cmd
+        run: git clone --recursive https://jugit.fz-juelich.de/mlz/libcerf.git && cd libcerf && git checkout ${{ env.tagName }} && cd ..
         
       - name: replace CMakeLists.txt
         shell: cmd
